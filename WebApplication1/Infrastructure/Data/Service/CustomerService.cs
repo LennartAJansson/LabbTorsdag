@@ -2,12 +2,16 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using WebApplication1.Domain.Model;
-using WebApplication1.Domain.Services;
+using WebApplication1.Features.Customers.CreateCustomer;
+using WebApplication1.Features.Customers.DeleteCustomer;
+using WebApplication1.Features.Customers.GetCustomer;
+using WebApplication1.Features.Customers.GetCustomers;
+using WebApplication1.Features.Customers.Model;
+using WebApplication1.Features.Customers.UpdateCustomer;
 using WebApplication1.Infrastructure.Data.Context;
 
 public class CustomerService(CustomerContext context)
-  : ICustomerCreateService, ICustomerUpdateService, ICustomerDeleteService, ICustomerReadService
+  : ICreateCustomerService, IUpdateCustomerService, IDeleteCustomerService, IGetCustomerService, IGetCustomersService
 {
   public async Task<Customer> Create(Customer customer, CancellationToken cancellationToken = default)
   {

@@ -1,4 +1,4 @@
-﻿namespace WebApplication1.Domain.Model;
+﻿namespace WebApplication1.Features.Customers.Model;
 
 public class EntityBase
 {

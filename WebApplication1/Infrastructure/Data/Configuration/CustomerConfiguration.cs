@@ -3,7 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using WebApplication1.Domain.Model;
+using WebApplication1.Features.Customers.Model;
 
 public class CustomerConfiguration
   : IEntityTypeConfiguration<Customer>

@@ -6,7 +6,7 @@ using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-using WebApplication1.Domain.Model;
+using WebApplication1.Features.Customers.Model;
 
 public class CustomerInterceptor(IHttpContextAccessor httpContextAccessor)
   : SaveChangesInterceptor

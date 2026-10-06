@@ -2,7 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using WebApplication1.Domain.Model;
+using WebApplication1.Features.Customers.Model;
 
 public class CustomerContext(DbContextOptions<CustomerContext> options) 
   : DbContext(options)
