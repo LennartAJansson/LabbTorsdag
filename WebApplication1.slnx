@@ -1,3 +1,5 @@
 <Solution>
+  <Project Path="Common/Common.csproj" Id="e7e2687e-1fa2-447b-804f-529edab3ebcf" />
+  <Project Path="Customers/Customers.csproj" Id="9e81a87b-a3f7-4d02-8062-3dcb1113218f" />
   <Project Path="WebApplication1/WebApplication1.csproj" />
 </Solution>

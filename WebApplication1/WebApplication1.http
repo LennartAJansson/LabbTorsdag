@@ -1,6 +1,6 @@
-@WebApplication1_HostAddress = http://localhost:5105
+@Customers_HostAddress = http://localhost:5105
 
-GET {{WebApplication1_HostAddress}}/weatherforecast/
+GET {{Customers_HostAddress}}/weatherforecast/
 Accept: application/json
 Authenticate: "bearer ......."
 

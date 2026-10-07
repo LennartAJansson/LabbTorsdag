@@ -1,16 +1,16 @@
 using Scalar.AspNetCore;
 
-using WebApplication1.Features.Customers.Extensions;
-using WebApplication1.Infrastructure.Data.Extensions;
+using Customers.Features.Customers.Extensions;
+using Customers.Infrastructure.Data.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddHandlers();
+builder.Services.AddCustomersHandlers();
 
-builder.Services.AddApplicationData(builder.Configuration);
+builder.Services.AddCustomersData(builder.Configuration);
 
 WebApplication app = builder.Build();
 
@@ -23,6 +23,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapEndpoints();
+app.MapCustomersEndpoints();
 
 app.Run();
