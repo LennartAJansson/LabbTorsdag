@@ -1,5 +1,14 @@
 <Solution>
-  <Project Path="Common/Common.csproj" Id="e7e2687e-1fa2-447b-804f-529edab3ebcf" />
-  <Project Path="Customers/Customers.csproj" Id="9e81a87b-a3f7-4d02-8062-3dcb1113218f" />
-  <Project Path="WebApplication1/WebApplication1.csproj" />
+  <Folder Name="/ModularMonolith/">
+    <Project Path="WebApplication1/WebApplication1.csproj" />
+  </Folder>
+  <Folder Name="/Modules/">
+    <Project Path="Customers/Customers.csproj" Id="9e81a87b-a3f7-4d02-8062-3dcb1113218f" />
+    <Project Path="Employees/Employees.csproj" Id="7131fd3e-89a0-4643-b2d1-5acba5f23bc9" />
+  </Folder>
+  <Folder Name="/Shared/">
+    <Project Path="Common/Common.csproj" Id="e7e2687e-1fa2-447b-804f-529edab3ebcf" />
+    <Project Path="Messaging/Messaging.csproj" Id="5d4a206a-8872-48e2-a653-77800e8f8e7b" />
+  </Folder>
+  <Project Path="WebApplication2/WebApplication2.csproj" Id="83a6533d-b5f2-48b0-934f-d7561cd8d1ac" />
 </Solution>

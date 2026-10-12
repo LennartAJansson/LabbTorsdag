@@ -22,7 +22,7 @@ public static class DbExtensions
     {
       services.AddDbContext<CustomerContext>((sp, options) =>
       {
-        options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+        options.UseSqlServer(configuration.GetConnectionString("CustomersConnection"));
         options.AddInterceptors(sp.GetRequiredService<CustomerInterceptor>());
       });
 
