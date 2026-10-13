@@ -11,7 +11,14 @@ internal sealed class GetAllEmployeesMapper
   {
     return new GetAllEmployeesResponse(e.Select(employee => new GetAllEmployeesResponseItem(
       employee.Id,
-      employee.Name
-    )));
+      employee.SSID,
+      employee.Title,
+      employee.GivenName,
+      employee.Surname,
+      employee.Street,
+      employee.PostalCode,
+      employee.City,
+      employee.Phone
+    )).ToList());
   }
 }

@@ -17,6 +17,7 @@ public class GetAllCustomersEndpoint
       var result = await handler.HandleAsync(new GetAllCustomersRequest());
       return result.ToMinimalApiResult(error => Results.BadRequest(new { error }));
     })
+    .Produces<GetAllCustomersResponse>()
     .WithName("GetAllCustomers");
     return endpoints;
   }

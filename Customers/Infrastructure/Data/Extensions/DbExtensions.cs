@@ -40,7 +40,7 @@ public static class DbExtensions
 
   extension(WebApplication app)
   {
-    public WebApplication UseApplicationData()
+    public WebApplication UseCustomersData()
     {
       using var scope = app.Services.CreateScope();
       var context = scope.ServiceProvider.GetRequiredService<CustomerContext>();

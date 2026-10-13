@@ -9,7 +9,13 @@ public static class GetCustomerMappers
   {
     public GetCustomerResponse ToGetCustomerResponse() => new GetCustomerResponse(
       customer.Id,
-      customer.CompanyName
+      customer.CompanyName,
+      customer.OrganizationNumber,
+      customer.ContactName,
+      customer.Street,
+      customer.PostalCode,
+      customer.City,
+      customer.Phone
     );
   }
 }

@@ -8,14 +8,26 @@ public static class CreateCustomerMappers
   {
     public Customer ToCustomer() => new Customer
     {
-      CompanyName = request.CompanyName
+      CompanyName = request.CompanyName,
+      OrganizationNumber = request.OrganizationNumber,
+      ContactName = request.ContactName,
+      Street = request.Street,
+      PostalCode = request.PostalCode,
+      City = request.City,
+      Phone = request.Phone
     };  
   }
   extension(Customer customer)
   {
     public CreateCustomerResponse ToCreateCustomerResponse() => new CreateCustomerResponse(
       customer.Id,
-      customer.CompanyName
+      customer.CompanyName,
+      customer.OrganizationNumber,
+      customer.ContactName,
+      customer.Street,
+      customer.PostalCode,
+      customer.City,
+      customer.Phone
     );
   }
 }

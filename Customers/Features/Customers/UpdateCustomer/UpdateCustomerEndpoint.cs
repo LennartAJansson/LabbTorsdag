@@ -17,6 +17,7 @@ public sealed class UpdateCustomerEndpoint
       var result = await handler.HandleAsync(request);
       return result.ToMinimalApiResult(error => Results.BadRequest(new { error }));
     })
+    .Produces<UpdateCustomerResponse>()
     .WithName("UpdateCustomer");
     return endpoints;
   }

@@ -9,6 +9,6 @@ internal sealed class DeleteEmployeeMapper
 {
   public override DeleteEmployeeResponse FromEntity(Employee e)
   {
-    return new DeleteEmployeeResponse(e.Id, e.Name);
+    return new DeleteEmployeeResponse(e.Id, e.SSID, e.Title, e.GivenName, e.Surname, e.Street, e.PostalCode, e.City, e.Phone);
   }
 }

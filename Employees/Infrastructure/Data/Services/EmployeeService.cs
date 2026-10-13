@@ -36,7 +36,14 @@ public class EmployeeService(EmployeeContext context)
     if (existing is null)
       return null;
 
-    existing.Name = employee.Name;
+    existing.SSID = employee.SSID;
+    existing.Title = employee.Title;
+    existing.GivenName = employee.GivenName;
+    existing.Surname = employee.Surname;
+    existing.Street = employee.Street;
+    existing.PostalCode = employee.PostalCode;
+    existing.City = employee.City;
+    existing.Phone = employee.Phone;
     await context.SaveChangesAsync(cancellationToken);
     return existing;
   }

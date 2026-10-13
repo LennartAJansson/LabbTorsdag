@@ -12,12 +12,19 @@ internal sealed class UpdateEmployeeMapper
     return new Employee
     {
       Id = r.Id,
-      Name = r.Name
+      SSID = r.SSID,
+      Title = r.Title,
+      GivenName = r.GivenName,
+      Surname = r.Surname,
+      Street = r.Street,
+      PostalCode = r.PostalCode,
+      City = r.City,
+      Phone = r.Phone
     };
   }
 
   public override UpdateEmployeeResponse FromEntity(Employee e)
   {
-    return new UpdateEmployeeResponse(e.Id, e.Name);
+    return new UpdateEmployeeResponse(e.Id, e.SSID, e.Title, e.GivenName, e.Surname, e.Street, e.PostalCode, e.City, e.Phone);
   }
 }

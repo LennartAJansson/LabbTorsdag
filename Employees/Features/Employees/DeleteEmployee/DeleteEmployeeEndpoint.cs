@@ -17,7 +17,7 @@ internal sealed class DeleteEmployeeEndpoint
 
     if (result.IsFailure)
     {
-      await Send.NotFoundAsync(cancellationToken);
+      await Send.StringAsync(result.Error, statusCode: 400, cancellation: cancellationToken);
       return;
     }
 

@@ -9,14 +9,26 @@ public static class  UpdateCustomerMapper
     public Customer ToCustomer() => new Customer
     {
       Id = request.Id,
-      CompanyName = request.CompanyName
+      CompanyName = request.CompanyName,
+      OrganizationNumber = request.OrganizationNumber,
+      ContactName = request.ContactName,
+      Street = request.Street,
+      PostalCode = request.PostalCode,
+      City = request.City,
+      Phone = request.Phone
     };
   }
   extension(Customer customer)
   {
     public UpdateCustomerResponse ToUpdateCustomerResponse() => new UpdateCustomerResponse(
       customer.Id,
-      customer.CompanyName
+      customer.CompanyName,
+      customer.OrganizationNumber,
+      customer.ContactName,
+      customer.Street,
+      customer.PostalCode,
+      customer.City,
+      customer.Phone
     );
   }
 }

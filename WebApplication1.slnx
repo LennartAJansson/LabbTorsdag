@@ -10,5 +10,4 @@
     <Project Path="Common/Common.csproj" Id="e7e2687e-1fa2-447b-804f-529edab3ebcf" />
     <Project Path="Messaging/Messaging.csproj" Id="5d4a206a-8872-48e2-a653-77800e8f8e7b" />
   </Folder>
-  <Project Path="WebApplication2/WebApplication2.csproj" Id="83a6533d-b5f2-48b0-934f-d7561cd8d1ac" />
 </Solution>

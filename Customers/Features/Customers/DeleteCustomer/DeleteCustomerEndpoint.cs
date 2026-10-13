@@ -17,6 +17,7 @@ public class DeleteCustomerEndpoint
       var result = await handler.HandleAsync(new DeleteCustomerRequest(id));
       return result.ToMinimalApiResult(error => Results.NotFound(new { error }));
     })
+    .Produces<DeleteCustomerResponse>()
     .WithName("DeleteCustomer");
     return endpoints;
   }

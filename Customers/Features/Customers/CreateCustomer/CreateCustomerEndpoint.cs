@@ -18,6 +18,7 @@ public sealed class CreateCustomerEndpoint
       var result = await handler.HandleAsync(request);
       return result.ToMinimalApiResult(error => Results.BadRequest(new { error }));
     })
+    .Produces<CreateCustomerResponse>()
     .WithName("CreateCustomer");
 
     return endpoints;

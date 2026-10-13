@@ -3,7 +3,7 @@ namespace Employees.Features.Employees.GetAllEmployees;
 using FastEndpoints;
 
 internal sealed class GetAllEmployeesEndpoint
-  : Endpoint<GetAllEmployeesRequest, GetAllEmployeesResponse, GetAllEmployeesMapper>
+  : EndpointWithoutRequest<GetAllEmployeesResponse, GetAllEmployeesMapper>
 {
   public override void Configure()
   {
@@ -11,9 +11,9 @@ internal sealed class GetAllEmployeesEndpoint
     AllowAnonymous();
   }
 
-  public override async Task HandleAsync(GetAllEmployeesRequest request, CancellationToken cancellationToken)
+  public override async Task HandleAsync(CancellationToken cancellationToken)
   {
-    var result = await request.ExecuteAsync(cancellationToken);
+    var result = await new GetAllEmployeesRequest().ExecuteAsync(cancellationToken);
 
     await Send.OkAsync(result.Value, cancellationToken);
   }

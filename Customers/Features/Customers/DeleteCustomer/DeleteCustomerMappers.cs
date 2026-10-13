@@ -8,7 +8,13 @@ public static class DeleteCustomerMappers
   {
     public DeleteCustomerResponse ToDeleteCustomerResponse() => new DeleteCustomerResponse(
       customer.Id,
-      customer.CompanyName
+      customer.CompanyName,
+      customer.OrganizationNumber,
+      customer.ContactName,
+      customer.Street,
+      customer.PostalCode,
+      customer.City,
+      customer.Phone
     );
   }
 }

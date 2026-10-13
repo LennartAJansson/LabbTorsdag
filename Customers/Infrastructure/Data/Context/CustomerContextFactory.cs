@@ -10,9 +10,7 @@ public class CustomerContextFactory : IDesignTimeDbContextFactory<CustomerContex
   {
     IConfigurationRoot configuration = new ConfigurationBuilder()
       .SetBasePath(Directory.GetCurrentDirectory())
-      .AddJsonFile("appsettings.json", optional: true)
       .AddUserSecrets<CustomerContextFactory>(optional: true)
-      .AddEnvironmentVariables()
       .Build();
 
     var optionsBuilder = new DbContextOptionsBuilder<CustomerContext>();

@@ -21,8 +21,4 @@
 		</PackageReference>
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Features\Employees\Core\" />
-	</ItemGroup>
 </Project>

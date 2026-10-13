@@ -12,6 +12,13 @@ public class EmployeeConfiguration
   {
     builder.ToTable("Employees");
     builder.HasKey(e => e.Id);
-    builder.Property(e => e.Name).IsRequired();
+    builder.Property(e => e.SSID).IsRequired();
+    builder.Property(e => e.Title).IsRequired();
+    builder.Property(e => e.GivenName).IsRequired();
+    builder.Property(e => e.Surname).IsRequired();
+    builder.Property(e => e.Street).IsRequired();
+    builder.Property(e => e.PostalCode).IsRequired();
+    builder.Property(e => e.City).IsRequired();
+    builder.Property(e => e.Phone).IsRequired();
   }
 }

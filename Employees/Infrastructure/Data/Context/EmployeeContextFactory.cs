@@ -10,9 +10,7 @@ public class EmployeeContextFactory : IDesignTimeDbContextFactory<EmployeeContex
   {
     IConfigurationRoot configuration = new ConfigurationBuilder()
       .SetBasePath(Directory.GetCurrentDirectory())
-      .AddJsonFile("appsettings.json", optional: true)
       .AddUserSecrets<EmployeeContextFactory>(optional: true)
-      .AddEnvironmentVariables()
       .Build();
 
     var optionsBuilder = new DbContextOptionsBuilder<EmployeeContext>();
