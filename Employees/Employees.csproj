@@ -13,6 +13,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Common\Common.csproj" />
+		<ProjectReference Include="..\Messaging.Channels\Messaging.Channels.csproj" />
 		<PackageReference Include="FastEndpoints" Version="8.3.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.12" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.12">
