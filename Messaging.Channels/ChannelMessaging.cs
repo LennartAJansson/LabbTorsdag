@@ -9,11 +9,10 @@ using Microsoft.Extensions.Logging;
 
 public class ChannelMessaging<T>(ILogger<ChannelMessaging<T>> logger) : IMessaging<T>
 {
-  Channel<Message<T>>? channel = null;
+  Channel<Message<T>> channel = Channel.CreateUnbounded<Message<T>>();
 
   public Task Init()
   {
-    channel= Channel.CreateUnbounded<Message<T>>();
     return Task.CompletedTask;
   }
 

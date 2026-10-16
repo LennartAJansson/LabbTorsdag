@@ -13,7 +13,7 @@ public static class CustomersMessagingExtensions
   {
     public IServiceCollection AddCustomerMessaging()
     {
-      _=services.AddSingleton<IMessaging<Customer>, ChannelMessaging<Customer>>();
+      _=services.AddSingleton<IMessaging<CustomerContract>, ChannelMessaging<CustomerContract>>();
       return services;
     }
   }

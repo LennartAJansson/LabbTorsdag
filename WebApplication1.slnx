@@ -5,6 +5,7 @@
   <Folder Name="/Modules/">
     <Project Path="Customers/Customers.csproj" Id="9e81a87b-a3f7-4d02-8062-3dcb1113218f" />
     <Project Path="Employees/Employees.csproj" Id="7131fd3e-89a0-4643-b2d1-5acba5f23bc9" />
+    <Project Path="Workloads/Workloads.csproj" Id="5bf1a11a-45bf-43f7-9de9-cb8b69441f9f" />
   </Folder>
   <Folder Name="/Shared/">
     <Project Path="Common/Common.csproj" Id="e7e2687e-1fa2-447b-804f-529edab3ebcf" />

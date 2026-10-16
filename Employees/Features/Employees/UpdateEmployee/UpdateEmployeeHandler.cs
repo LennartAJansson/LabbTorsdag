@@ -4,11 +4,12 @@ using Common;
 
 using FastEndpoints;
 
+using global::Employees.Features.Employees.Mappers;
 using global::Employees.Features.Employees.Model;
 
 using Messaging.Abstract;
 
-internal sealed class UpdateEmployeeHandler(UpdateEmployeeMapper mapper, IUpdateEmployeeService service, IMessaging<Employee> messaging)
+internal sealed class UpdateEmployeeHandler(UpdateEmployeeMapper mapper, IUpdateEmployeeService service, IMessaging<EmployeeContract> messaging)
   : ICommandHandler<UpdateEmployeeRequest, Result<UpdateEmployeeResponse>>
 {
   public async Task<Result<UpdateEmployeeResponse>> ExecuteAsync(UpdateEmployeeRequest command, CancellationToken ct)
@@ -19,7 +20,7 @@ internal sealed class UpdateEmployeeHandler(UpdateEmployeeMapper mapper, IUpdate
       return Result.Failure<UpdateEmployeeResponse>($"Employee with id '{command.Id}' was not found.");
     }
 
-    await messaging.PublishAsync(new Message<Employee>(MessageType.Update, employee), ct);
+    await messaging.PublishAsync(new Message<EmployeeContract>(MessageType.Update, employee.ToContract()), ct);
     return Result.Success(mapper.FromEntity(employee));
   }
 }

@@ -13,7 +13,7 @@ public static class EmployeesMessagingExtensions
   {
     public IServiceCollection AddEmployeeMessaging()
     {
-      _=services.AddSingleton<IMessaging<Employee>, ChannelMessaging<Employee>>();
+      _=services.AddSingleton<IMessaging<EmployeeContract>, ChannelMessaging<EmployeeContract>>();
       return services;
     }
   }

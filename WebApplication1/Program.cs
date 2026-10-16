@@ -7,19 +7,17 @@ using Employees.Features.Employees.Extensions;
 using Employees.Infrastructure.Data.Extensions;
 using Customers.Infrastructure.Messaging;
 using Employees.Infrastructure.Messaging;
-using WebApplication1;
+using Workloads.Infrastructure.Data.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddHostedService<TestCustomerWorker>()
-  .AddHostedService<TestEmployeeWorker>();
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 builder.Services.AddCustomerMessaging()
-  .AddEmployeeMessaging();
+  .AddEmployeeMessaging()
+  .AddWorkloadsMessaging();
 
 builder.Services
   .AddCustomersHandlers()
@@ -27,7 +25,8 @@ builder.Services
 
 builder.Services
   .AddCustomersData(builder.Configuration)
-  .AddEmployeesData(builder.Configuration);
+  .AddEmployeesData(builder.Configuration)
+  .AddWorkloadsData(builder.Configuration);
 
 WebApplication app = builder.Build();
 
