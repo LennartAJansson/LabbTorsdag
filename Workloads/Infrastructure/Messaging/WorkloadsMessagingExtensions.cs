@@ -1,4 +1,4 @@
-﻿namespace Employees.Infrastructure.Messaging;
+﻿namespace Workloads.Infrastructure.Messaging;
 
 using Microsoft.Extensions.DependencyInjection;
 

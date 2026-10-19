@@ -5,6 +5,7 @@ using System.Reflection;
 using global::Customers.Features.Customers.Core;
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
 public static class EndpointExtensions
@@ -13,7 +14,8 @@ public static class EndpointExtensions
   {
     public IEndpointRouteBuilder MapCustomersEndpoints()
     {
-      RouteGroupBuilder group = app.MapGroup("/customers");
+      RouteGroupBuilder group = app.MapGroup("/customers")
+        .WithTags(typeof(IEndpoint).Assembly.GetName().Name!);
 
       var endpointTypes = typeof(IEndpoint).Assembly
         .GetTypes()

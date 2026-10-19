@@ -7,7 +7,9 @@ using Employees.Features.Employees.Extensions;
 using Employees.Infrastructure.Data.Extensions;
 using Customers.Infrastructure.Messaging;
 using Employees.Infrastructure.Messaging;
+using Workloads.Features.Extensions;
 using Workloads.Infrastructure.Data.Extensions;
+using Workloads.Infrastructure.Messaging;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +23,8 @@ builder.Services.AddCustomerMessaging()
 
 builder.Services
   .AddCustomersHandlers()
-  .AddEmployeesHandlers();
+  .AddEmployeesHandlers()
+  .AddWorkloadsHandlers();
 
 builder.Services
   .AddCustomersData(builder.Configuration)
@@ -41,7 +44,8 @@ app.UseHttpsRedirection();
 
 app
   .UseCustomersData()
-  .UseEmployeesData();
+  .UseEmployeesData()
+  .UseWorkloadsData();
 
 app.MapCustomersEndpoints();
 app.MapEmployeesEndpoints();

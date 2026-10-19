@@ -3,6 +3,7 @@ namespace Employees.Features.Employees.Extensions;
 using FastEndpoints;
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 
 public static class EndpointExtensions
 {
@@ -14,12 +15,16 @@ public static class EndpointExtensions
     /// <remarks>
     /// <see cref="EndpointRouteBuilderExtensions.UseFastEndpoints"/> is a global, assembly-agnostic
     /// pipeline call (it maps endpoints discovered across all loaded assemblies) and must only be called
-    /// once per application. Since Employees is currently the only module using FastEndpoints, the call
-    /// is kept here to encapsulate FastEndpoints-specific wiring within this module.
+    /// once per application. This call maps both Employees and Workloads endpoints; a separate
+    /// UseFastEndpoints call for Workloads must not be added.
     /// </remarks>
     public WebApplication MapEmployeesEndpoints()
     {
-      app.UseFastEndpoints();
+      app.UseFastEndpoints(options =>
+      {
+        options.Endpoints.Configurator = endpoint =>
+          endpoint.Options(builder => builder.WithTags(endpoint.EndpointType.Assembly.GetName().Name!));
+      });
 
       return app;
     }

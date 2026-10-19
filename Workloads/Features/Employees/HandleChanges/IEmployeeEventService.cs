@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using Workloads.Features.Model;
+using global::Workloads.Features.Model;
 
 public interface IEmployeeEventService
 {

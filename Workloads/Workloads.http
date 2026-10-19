@@ -1,0 +1,39 @@
+# Configure ConnectionStrings:WorkloadsConnection in the host's user secrets before starting.
+# For module-local EF commands, configure the same key in Workloads user secrets:
+# dotnet user-secrets set "ConnectionStrings:WorkloadsConnection" "<connection-string>" --project .\Workloads\Workloads.csproj
+# From the Workloads directory: dotnet ef database update
+# The host also applies pending Workloads migrations at startup.
+# Projections are populated asynchronously by Channel events, not by an initial backfill.
+# Deleted projections disappear from selection lists; workload history is retained.
+
+@host = https://localhost:7000
+@customerId = 00000000-0000-0000-0000-000000000001
+@employeeId = 00000000-0000-0000-0000-000000000002
+@workloadId = 00000000-0000-0000-0000-000000000003
+
+### Customer selection: { "customers": [ { "id": "...", "companyName": "..." } ] }
+GET {{host}}/workloadcustomers
+
+### Employee selection: { "employees": [ { "id": "...", "givenName": "...", "surname": "..." } ] }
+GET {{host}}/workloademployees
+
+### Start: returns id, customerId, employeeId, start (UTC), stop (null), notes.
+# Invalid input or missing/deleted customer/employee returns 400.
+POST {{host}}/workload
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId}}",
+  "employeeId": "{{employeeId}}",
+  "notes": "Service work"
+}
+
+### Stop: server-generated UTC time. Repeated PUT preserves the first stop time.
+# Unknown workload returns 404. Stopping a workload for a deleted projection is allowed.
+PUT {{host}}/workload/{{workloadId}}/stop
+
+### History: { "workloads": [ ... ] }, newest first; no matches returns an empty list.
+GET {{host}}/workloads/customer/{{customerId}}
+
+### History by employee, including active and stopped workloads.
+GET {{host}}/workloads/employee/{{employeeId}}

@@ -20,8 +20,8 @@ public static class HandlersExtensions
     /// <remarks>
     /// <see cref="EndpointServiceCollectionExtensions.AddFastEndpoints"/> is a global, assembly-agnostic
     /// registration (it discovers endpoints across all loaded assemblies) and must only be called once
-    /// per application. Since Employees is currently the only module using FastEndpoints, the call is
-    /// kept here to encapsulate FastEndpoints-specific wiring within this module.
+    /// per application. This call also discovers the Workloads module; AddWorkloadsHandlers registers
+    /// that module's mapper dependencies without repeating this global registration.
     /// </remarks>
     public IServiceCollection AddEmployeesHandlers()
     {

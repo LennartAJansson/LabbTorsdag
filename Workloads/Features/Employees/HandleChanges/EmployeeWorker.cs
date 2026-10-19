@@ -2,19 +2,21 @@
 
 using Messaging.Abstract;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using Workloads.Features.Model;
+using global::Workloads.Features.Model;
 
-public class EmployeeWorker(ILogger<EmployeeWorker> logger, IMessaging<EmployeeContract> messaging, IEmployeeEventService service) 
+public class EmployeeWorker(ILogger<EmployeeWorker> logger, IMessaging<EmployeeContract> messaging, IServiceScopeFactory scopeFactory)
   : BackgroundService
 {
   protected override async Task ExecuteAsync(CancellationToken stoppingToken)
   {
-    // DO NOT CALL INIT() HERE, IT WILL BE CALLED AUTOMATICALLY WHEN THE FIRST MESSAGE IS GOINT TO BE SENT
     await foreach (Message<EmployeeContract> msg in messaging.ConsumeAsync(stoppingToken))
     {
+      await using var scope = scopeFactory.CreateAsyncScope();
+      var service = scope.ServiceProvider.GetRequiredService<IEmployeeEventService>();
       WorkloadEmployee employee = new()
       {
         Id = msg.Payload.Id,
@@ -32,6 +34,8 @@ public class EmployeeWorker(ILogger<EmployeeWorker> logger, IMessaging<EmployeeC
         case MessageType.Delete:
           await service.DeleteEmployee(employee, stoppingToken);
           break;
+        default:
+          throw new InvalidOperationException($"Unsupported employee message type '{msg.Type}'.");
       }
       logger.LogInformation("Received {operation} of employee: {EmployeeId}", msg.Type, msg.Payload.Id);
     }
