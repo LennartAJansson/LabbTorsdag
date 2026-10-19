@@ -11,5 +11,6 @@
     <Project Path="Common/Common.csproj" Id="e7e2687e-1fa2-447b-804f-529edab3ebcf" />
     <Project Path="Messaging.Abstract/Messaging.Abstract.csproj" Id="49e6d96c-a8ac-431b-ad03-2a678dad9e77" />
     <Project Path="Messaging.Channels/Messaging.Channels.csproj" Id="d0ba26e0-f283-4013-ae86-a26bf928faff" />
+    <Project Path="Messaging.Nats/Messaging.Nats.csproj" Id="6ba6eddf-adf8-41f6-b448-23c7fa3172bd" />
   </Folder>
 </Solution>

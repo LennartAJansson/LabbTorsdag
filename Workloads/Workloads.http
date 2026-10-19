@@ -6,7 +6,7 @@
 # Projections are populated asynchronously by Channel events, not by an initial backfill.
 # Deleted projections disappear from selection lists; workload history is retained.
 
-@host = https://localhost:7000
+@host = https://localhost:7086
 @customerId = 00000000-0000-0000-0000-000000000001
 @employeeId = 00000000-0000-0000-0000-000000000002
 @workloadId = 00000000-0000-0000-0000-000000000003

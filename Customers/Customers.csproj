@@ -5,6 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<UserSecretsId>63eb83bb-b669-49ba-868c-8405d30f3886</UserSecretsId>
+		<NoWarn>$(NoWarn);NU1510</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -15,6 +16,7 @@
 		<ProjectReference Include="..\Common\Common.csproj" />
 		<ProjectReference Include="..\Messaging.Abstract\Messaging.Abstract.csproj" />
 		<ProjectReference Include="..\Messaging.Channels\Messaging.Channels.csproj" />
+		<ProjectReference Include="..\Messaging.Nats\Messaging.Nats.csproj" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.13" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.13">
 			<PrivateAssets>all</PrivateAssets>
