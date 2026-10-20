@@ -18,6 +18,7 @@ public class ChannelMessaging<T>(ILogger<ChannelMessaging<T>> logger) : IMessagi
 
   public async IAsyncEnumerable<Message<T>> ConsumeAsync([EnumeratorCancellation] CancellationToken cancellationToken)
   {
+    logger.LogInformation("Starting to consume messages over channels"); 
     await foreach (Message<T> msg in channel.Reader.ReadAllAsync(cancellationToken))
     {
       yield return msg;
@@ -26,6 +27,7 @@ public class ChannelMessaging<T>(ILogger<ChannelMessaging<T>> logger) : IMessagi
 
   public async Task PublishAsync(Message<T> message, CancellationToken cancellationToken)
   {
+    logger.LogInformation("Starting to publish messages over channels");
     cancellationToken.ThrowIfCancellationRequested();
     logger.LogInformation("Publishing: {MessageType} {PayloadType}", message.Type, message.Payload?.GetType());
     await channel.Writer.WriteAsync(message, cancellationToken);

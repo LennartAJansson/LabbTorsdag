@@ -39,6 +39,7 @@ public class NatsMessaging<T>
 
   public async Task PublishAsync(Message<T> message, CancellationToken cancellationToken)
   {
+    logger.LogInformation("Starting to publish messages over NATS");
     cancellationToken.ThrowIfCancellationRequested();
     logger.LogInformation("Publishing: {MessageType} {PayloadType}", message.Type, message.Payload?.GetType());
     await connection.PublishAsync(subject, message, cancellationToken: cancellationToken);
@@ -46,6 +47,7 @@ public class NatsMessaging<T>
 
   public async IAsyncEnumerable<Message<T>> ConsumeAsync([EnumeratorCancellation] CancellationToken cancellationToken)
   {
+    logger.LogInformation("Starting to consume messages over NATS");
     await foreach (var msg in connection.SubscribeAsync<Message<T>>(subject, cancellationToken: cancellationToken))
     {
       yield return msg.Data;

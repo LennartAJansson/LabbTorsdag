@@ -15,11 +15,10 @@ public static class CustomersMessagingExtensions
   {
     public IServiceCollection AddCustomerMessaging()
     {
-      _=services.AddSingleton<IMessaging<CustomerContract>>(sp=>
-        new NatsMessaging<CustomerContract>(
-          sp.GetRequiredService<ILogger<NatsMessaging<CustomerContract>>>()
-        , "customer.info"));
-      //_=services.AddSingleton<IMessaging<CustomerContract>, ChannelMessaging<CustomerContract>>();
+      if (Environment.GetEnvironmentVariable("ISMONOLITH")=="true")
+        services.AddChannelMessaging<CustomerContract>();
+      else
+        services.AddNatsMessaging<CustomerContract>("customer.info");
       return services;
     }
   }

@@ -1,7 +1,5 @@
 ﻿namespace Employees.Infrastructure.Messaging;
 
-using Employees.Features.Employees.Model;
-
 using global::Messaging.Abstract;
 using global::Messaging.Channels;
 using global::Messaging.Nats;
@@ -15,11 +13,10 @@ public static class EmployeesMessagingExtensions
   {
     public IServiceCollection AddEmployeeMessaging()
     {
-      _=services.AddSingleton<IMessaging<EmployeeContract>>(sp=>
-        new NatsMessaging<EmployeeContract>(
-          sp.GetRequiredService<ILogger<NatsMessaging<EmployeeContract>>>()
-        , "employee.info"));
-      //_=services.AddSingleton<IMessaging<EmployeeContract>, ChannelMessaging<EmployeeContract>>();
+      if (Environment.GetEnvironmentVariable("ISMONOLITH")=="true")
+        services.AddChannelMessaging<EmployeeContract>();
+      else
+        services.AddNatsMessaging<EmployeeContract>("employee.info");
       return services;
     }
   }
