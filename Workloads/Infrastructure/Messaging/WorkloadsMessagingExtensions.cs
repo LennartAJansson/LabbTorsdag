@@ -1,6 +1,8 @@
 ﻿namespace Workloads.Infrastructure.Messaging;
 
 using global::Messaging.Abstract;
+using global::Messaging.Channels;
+using global::Messaging.Nats;
 
 using Microsoft.Extensions.DependencyInjection;
 
