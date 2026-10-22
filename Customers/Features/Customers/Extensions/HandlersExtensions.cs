@@ -11,7 +11,7 @@ public static class HandlersExtensions
 {
   extension(IServiceCollection services)
   {
-    public IServiceCollection AddCustomersHandlers()
+    public IServiceCollection AddCustomersSlices()
     {
       services.AddValidatorsFromAssembly(typeof(CreateCustomerValidation).Assembly, ServiceLifetime.Scoped);
       var handlerTypes = typeof(IRequestHandler<,>).Assembly

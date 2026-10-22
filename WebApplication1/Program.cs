@@ -46,14 +46,17 @@ builder.Services.AddOpenApi(options => options.AddOperationTransformer((operatio
   return Task.CompletedTask;
 }));
 
+// Lägg till FastEndpoints som registrerar alla kodgeneratorer mm för FastEndpoints.
+builder.Services.AddFastEndpoints();
+
 // Dessa tre lägger till alla Driving adapters,
 // slicar som innehåller endpoints och workers som tar emot requests av olika slag
 // Det innebär att AddWorkloadsHandlers() lägger till FastEndpoints endpoints för Workloads, 
 // men även de workers som tar emot meddelanden från Customers och Employees.
 builder.Services
-  .AddCustomersHandlers()
-  .AddEmployeesHandlers()
-  .AddWorkloadsHandlers();
+  .AddCustomersSlices()
+  .AddEmployeesSlices()
+  .AddWorkloadsSlices();
 
 // Dessa två lägger till Driven adapters (infrastructure - messaging) för Customers och Employees,
 // det är dessa som sänder information till Workloads via Messaging.

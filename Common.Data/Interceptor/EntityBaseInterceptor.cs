@@ -1,15 +1,14 @@
-﻿namespace Customers.Infrastructure.Data.Interceptor;
+﻿namespace Common.Data.Interceptor;
 
-using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-using Customers.Features.Customers.Model;
+using Common.Data.Models;
 using Microsoft.AspNetCore.Http;
 
-public class CustomerInterceptor(IHttpContextAccessor httpContextAccessor)
+public class EntityBaseInterceptor(IHttpContextAccessor httpContextAccessor)
   : SaveChangesInterceptor
 {
 

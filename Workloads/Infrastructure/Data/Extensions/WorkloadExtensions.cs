@@ -1,5 +1,7 @@
 ﻿namespace Workloads.Infrastructure.Data.Extensions;
 
+using Common.Data.Interceptor;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,8 +26,14 @@ public static class WorkloadExtensions
     {
       var connectionString = configuration.GetConnectionString("WorkloadsConnection")
         ?? throw new InvalidOperationException("Connection string 'WorkloadsConnection' is required.");
-      services.AddDbContext<WorkloadContext>(options => options.UseSqlServer(connectionString));
+      services.AddDbContext<WorkloadContext>((sp, options) =>
+      {
+        options.UseSqlServer(connectionString);
+        options.AddInterceptors(sp.GetRequiredService<EntityBaseInterceptor>());
+      });
 
+      services.AddHttpContextAccessor();
+      services.AddSingleton<EntityBaseInterceptor>();
       services.AddScoped<ICustomerChangeService, WorkloadService>();
       services.AddScoped<IEmployeeChangeService, WorkloadService>();
       services.AddScoped<IGetAllWorkloadCustomersService, WorkloadService>();

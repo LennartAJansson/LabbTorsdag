@@ -1,5 +1,7 @@
 namespace Employees.Infrastructure.Data.Extensions;
 
+using Common.Data.Interceptor;
+
 using global::Employees.Features.Employees.CreateEmployee;
 using global::Employees.Features.Employees.DeleteEmployee;
 using global::Employees.Features.Employees.GetAllEmployees;
@@ -19,11 +21,14 @@ public static class DbExtensions
   {
     public IServiceCollection AddEmployeesData(IConfiguration configuration)
     {
-      services.AddDbContext<EmployeeContext>(options =>
+      services.AddDbContext<EmployeeContext>((sp, options) =>
       {
         options.UseSqlServer(configuration.GetConnectionString("EmployeesConnection"));
+        options.AddInterceptors(sp.GetRequiredService<EntityBaseInterceptor>());
       });
 
+      services.AddHttpContextAccessor();
+      services.AddSingleton<EntityBaseInterceptor>();
       services.AddScoped<ICreateEmployeeService, EmployeeService>();
       services.AddScoped<IGetEmployeeService, EmployeeService>();
       services.AddScoped<IGetAllEmployeesService, EmployeeService>();

@@ -13,6 +13,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Common.Data\Common.Data.csproj" />
 		<ProjectReference Include="..\Common\Common.csproj" />
 		<ProjectReference Include="..\Messaging.Channels\Messaging.Channels.csproj" />
 		<ProjectReference Include="..\Messaging.Nats\Messaging.Nats.csproj" />

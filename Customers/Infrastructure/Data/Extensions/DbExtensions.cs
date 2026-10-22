@@ -8,11 +8,11 @@ using Customers.Features.Customers.GetCustomer;
 using Customers.Features.Customers.GetAllCustomers;
 using Customers.Features.Customers.UpdateCustomer;
 using Customers.Infrastructure.Data.Context;
-using Customers.Infrastructure.Data.Interceptor;
 using Customers.Infrastructure.Data.Service;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Builder;
+using Common.Data.Interceptor;
 
 public static class DbExtensions
 {
@@ -23,11 +23,11 @@ public static class DbExtensions
       services.AddDbContext<CustomerContext>((sp, options) =>
       {
         options.UseSqlServer(configuration.GetConnectionString("CustomersConnection"));
-        options.AddInterceptors(sp.GetRequiredService<CustomerInterceptor>());
+        options.AddInterceptors(sp.GetRequiredService<EntityBaseInterceptor>());
       });
 
       services.AddHttpContextAccessor();
-      services.AddSingleton<CustomerInterceptor>();
+      services.AddSingleton<EntityBaseInterceptor>();
       services.AddScoped<ICreateCustomerService, CustomerService>();
       services.AddScoped<IDeleteCustomerService, CustomerService>();
       services.AddScoped<IGetCustomerService, CustomerService>();

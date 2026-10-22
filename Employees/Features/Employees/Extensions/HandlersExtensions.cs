@@ -23,10 +23,8 @@ public static class HandlersExtensions
     /// per application. This call also discovers the Workloads module; AddWorkloadsHandlers registers
     /// that module's mapper dependencies without repeating this global registration.
     /// </remarks>
-    public IServiceCollection AddEmployeesHandlers()
+    public IServiceCollection AddEmployeesSlices()
     {
-      services.AddFastEndpoints();
-
       // FastEndpoints does not register Mapper<TRequest,TResponse,TEntity> types in the DI container
       // by default, even when declared as the TMapper generic argument on an Endpoint. Since our
       // ICommandHandler implementations inject their mapper via the constructor, each mapper must be

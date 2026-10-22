@@ -8,6 +8,7 @@
     <Project Path="Workloads/Workloads.csproj" Id="5bf1a11a-45bf-43f7-9de9-cb8b69441f9f" />
   </Folder>
   <Folder Name="/Shared/">
+    <Project Path="Common.Data/Common.Data.csproj" Id="bb9ee35a-0a28-4db7-8253-bebdee60dddd" />
     <Project Path="Common/Common.csproj" Id="e7e2687e-1fa2-447b-804f-529edab3ebcf" />
     <Project Path="Messaging.Abstract/Messaging.Abstract.csproj" Id="49e6d96c-a8ac-431b-ad03-2a678dad9e77" />
     <Project Path="Messaging.Channels/Messaging.Channels.csproj" Id="d0ba26e0-f283-4013-ae86-a26bf928faff" />

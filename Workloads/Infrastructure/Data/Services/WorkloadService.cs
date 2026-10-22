@@ -36,49 +36,18 @@ internal class WorkloadService(WorkloadContext context)
   public Task<WorkloadEmployee> DeleteEmployee(WorkloadEmployee employee, CancellationToken cancellationToken = default)
     => SaveEmployeeAsync(employee, true, cancellationToken);
 
-  private async Task<WorkloadCustomer> SaveCustomerAsync(WorkloadCustomer customer, bool isDeleted, CancellationToken ct)
-  {
-    var existing = await context.Customers.SingleOrDefaultAsync(c => c.Id == customer.Id, ct);
-    if (existing is null)
-    {
-      existing = customer;
-      context.Customers.Add(existing);
-    }
-
-    existing.CompanyName = customer.CompanyName;
-    existing.IsDeleted = isDeleted;
-    await context.SaveChangesAsync(ct);
-    return existing;
-  }
-
-  private async Task<WorkloadEmployee> SaveEmployeeAsync(WorkloadEmployee employee, bool isDeleted, CancellationToken ct)
-  {
-    var existing = await context.Employees.SingleOrDefaultAsync(e => e.Id == employee.Id, ct);
-    if (existing is null)
-    {
-      existing = employee;
-      context.Employees.Add(existing);
-    }
-
-    existing.GivenName = employee.GivenName;
-    existing.Surname = employee.Surname;
-    existing.IsDeleted = isDeleted;
-    await context.SaveChangesAsync(ct);
-    return existing;
-  }
-
   public async Task<IEnumerable<WorkloadCustomer>> GetAllCustomersAsync(CancellationToken cancellationToken)
-    => await context.Customers.AsNoTracking().Where(c => !c.IsDeleted)
+    => await context.Customers.AsNoTracking().Where(c => !c.SourceIsDeleted)
       .OrderBy(c => c.CompanyName).ThenBy(c => c.Id).ToListAsync(cancellationToken);
 
   public async Task<IEnumerable<WorkloadEmployee>> GetAllEmployeesAsync(CancellationToken cancellationToken)
-    => await context.Employees.AsNoTracking().Where(e => !e.IsDeleted)
+    => await context.Employees.AsNoTracking().Where(e => !e.SourceIsDeleted)
       .OrderBy(e => e.Surname).ThenBy(e => e.GivenName).ThenBy(e => e.Id).ToListAsync(cancellationToken);
 
   public async Task<Workload?> StartWorkloadAsync(Workload workload, CancellationToken cancellationToken)
   {
-    if (!await context.Customers.AnyAsync(c => c.Id == workload.CustomerId && !c.IsDeleted, cancellationToken)
-      || !await context.Employees.AnyAsync(e => e.Id == workload.EmployeeId && !e.IsDeleted, cancellationToken))
+    if (!await context.Customers.AnyAsync(c => c.Id == workload.CustomerId && !c.SourceIsDeleted, cancellationToken)
+      || !await context.Employees.AnyAsync(e => e.Id == workload.EmployeeId && !e.SourceIsDeleted, cancellationToken))
       return null;
 
     context.Workloads.Add(workload);
@@ -103,4 +72,35 @@ internal class WorkloadService(WorkloadContext context)
   public async Task<IEnumerable<Workload>> GetWorkloadsByEmployeeAsync(Guid employeeId, CancellationToken cancellationToken)
     => await context.Workloads.AsNoTracking().Where(w => w.EmployeeId == employeeId)
       .OrderByDescending(w => w.Start).ThenBy(w => w.Id).ToListAsync(cancellationToken);
+
+  private async Task<WorkloadCustomer> SaveCustomerAsync(WorkloadCustomer customer, bool isDeleted, CancellationToken ct)
+  {
+    var existing = await context.Customers.SingleOrDefaultAsync(c => c.Id == customer.Id, ct);
+    if (existing is null)
+    {
+      existing = customer;
+      context.Customers.Add(existing);
+    }
+
+    existing.CompanyName = customer.CompanyName;
+    existing.SourceIsDeleted = isDeleted;
+    await context.SaveChangesAsync(ct);
+    return existing;
+  }
+
+  private async Task<WorkloadEmployee> SaveEmployeeAsync(WorkloadEmployee employee, bool isDeleted, CancellationToken ct)
+  {
+    var existing = await context.Employees.SingleOrDefaultAsync(e => e.Id == employee.Id, ct);
+    if (existing is null)
+    {
+      existing = employee;
+      context.Employees.Add(existing);
+    }
+
+    existing.GivenName = employee.GivenName;
+    existing.Surname = employee.Surname;
+    existing.SourceIsDeleted = isDeleted;
+    await context.SaveChangesAsync(ct);
+    return existing;
+  }
 }

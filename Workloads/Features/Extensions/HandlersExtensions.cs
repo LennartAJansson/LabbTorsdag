@@ -15,7 +15,7 @@ public static class HandlersExtensions
 {
   extension(IServiceCollection services)
   {
-    public IServiceCollection AddWorkloadsHandlers()
+    public IServiceCollection AddWorkloadsSlices()
     {
       // Dessa är att betrakta som driving adapters, alltså samma som endpoints
       services.AddHostedService<CustomerWorker>();
