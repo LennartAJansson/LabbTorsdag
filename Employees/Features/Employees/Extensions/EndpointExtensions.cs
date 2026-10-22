@@ -9,15 +9,8 @@ public static class EndpointExtensions
 {
   extension(WebApplication app)
   {
-    /// <summary>
-    /// Maps the Employees module's FastEndpoints endpoints into the request pipeline.
-    /// </summary>
-    /// <remarks>
-    /// <see cref="EndpointRouteBuilderExtensions.UseFastEndpoints"/> is a global, assembly-agnostic
-    /// pipeline call (it maps endpoints discovered across all loaded assemblies) and must only be called
-    /// once per application. This call maps both Employees and Workloads endpoints; a separate
-    /// UseFastEndpoints call for Workloads must not be added.
-    /// </remarks>
+    // Denna används bara om man vill ha en egen UseFastEndpoints för Employees, 
+    // Detta kan vara om man vill köra denna i en separat applikation (container exempelvis)
     public WebApplication MapEmployeesEndpoints()
     {
       app.UseFastEndpoints(options =>

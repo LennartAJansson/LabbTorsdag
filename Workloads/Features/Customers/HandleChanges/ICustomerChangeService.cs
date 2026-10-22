@@ -6,8 +6,9 @@ using System.Text;
 
 using global::Workloads.Features.Model;
 
-public interface ICustomerEventService
+public interface ICustomerChangeService
 {
+  // Interface för persisteringen av ändringar i WorkloadCustomer-objekt.
   Task<WorkloadCustomer> CreateCustomer(WorkloadCustomer customer, CancellationToken cancellationToken = default);
   Task<WorkloadCustomer> UpdateCustomer(WorkloadCustomer customer, CancellationToken cancellationToken = default);
   Task<WorkloadCustomer> DeleteCustomer(WorkloadCustomer customer, CancellationToken cancellationToken = default);

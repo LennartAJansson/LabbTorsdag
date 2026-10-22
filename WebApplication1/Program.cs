@@ -13,7 +13,6 @@ using Customers.Infrastructure.Messaging;
 using Employees.Infrastructure.Messaging;
 using Workloads.Features.Extensions;
 using Workloads.Infrastructure.Data.Extensions;
-using Workloads.Infrastructure.Messaging;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -47,15 +46,21 @@ builder.Services.AddOpenApi(options => options.AddOperationTransformer((operatio
   return Task.CompletedTask;
 }));
 
-builder.Services.AddCustomerMessaging()
-  .AddEmployeeMessaging()
-  .AddWorkloadsMessaging();
-
+// Dessa tre lägger till alla Driving adapters,
+// slicar som innehåller endpoints och workers som tar emot requests av olika slag
+// Det innebär att AddWorkloadsHandlers() lägger till FastEndpoints endpoints för Workloads, 
+// men även de workers som tar emot meddelanden från Customers och Employees.
 builder.Services
   .AddCustomersHandlers()
   .AddEmployeesHandlers()
   .AddWorkloadsHandlers();
 
+// Dessa två lägger till Driven adapters (infrastructure - messaging) för Customers och Employees,
+// det är dessa som sänder information till Workloads via Messaging.
+builder.Services.AddCustomerMessaging()
+  .AddEmployeeMessaging();
+
+// Dessa tre lägger till alla Driven adapters för infrastructure - data
 builder.Services
   .AddCustomersData(builder.Configuration)
   .AddEmployeesData(builder.Configuration)
@@ -72,12 +77,28 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Dessa tre använder Driven adapters (infrastructure - data) för Customers, Employees och Workloads
+// De kör migrations och säkerställer att databasen är uppdaterad med senaste versionen av modellen.
 app
   .UseCustomersData()
   .UseEmployeesData()
   .UseWorkloadsData();
 
+// Denna extension mappar alla MinimalEndpoints som finns i Customers (den enda som använder minimal endpoints)
 app.MapCustomersEndpoints();
-app.MapEmployeesEndpoints();
+
+// Detta anropet mappar ALLA FastEndpoints,
+// oavsett om de är i Customers, Employees eller Workloads.
+// Detta kan bara göras en gång per applikation,
+// eftersom FastEndpoints skannar alla assemblies efter dessa endpoints och mappar dem.
+app.UseFastEndpoints(options =>
+{
+  options.Endpoints.Configurator = endpoint =>
+    endpoint.Options(builder => builder.WithTags(endpoint.EndpointType.Assembly.GetName().Name!));
+});
+
+//Dessa behövs således inte om man kör som en modulär monolit
+//app.MapEmployeesEndpoints();
+//app.MapWorkloadsEndpoints();
 
 app.Run();

@@ -6,8 +6,9 @@ using System.Text;
 
 using global::Workloads.Features.Model;
 
-public interface IEmployeeEventService
+public interface IEmployeeChangeService
 {
+  // Interface för persisteringen av ändringar i WorkloadEmployee-objekt.
   Task<WorkloadEmployee> CreateEmployee(WorkloadEmployee employee, CancellationToken cancellationToken = default);
   Task<WorkloadEmployee> UpdateEmployee(WorkloadEmployee employee, CancellationToken cancellationToken = default);
   Task<WorkloadEmployee> DeleteEmployee(WorkloadEmployee employee, CancellationToken cancellationToken = default);

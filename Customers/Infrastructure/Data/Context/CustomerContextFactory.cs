@@ -8,7 +8,7 @@ public class CustomerContextFactory : IDesignTimeDbContextFactory<CustomerContex
 {
   public CustomerContext CreateDbContext(string[] args)
   {
-    IConfigurationRoot configuration = new ConfigurationBuilder()
+    IConfiguration configuration = new ConfigurationBuilder()
       .SetBasePath(Directory.GetCurrentDirectory())
       .AddUserSecrets<CustomerContextFactory>(optional: true)
       .Build();

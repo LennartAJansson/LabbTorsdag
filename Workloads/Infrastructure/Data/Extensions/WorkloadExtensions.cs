@@ -26,14 +26,15 @@ public static class WorkloadExtensions
         ?? throw new InvalidOperationException("Connection string 'WorkloadsConnection' is required.");
       services.AddDbContext<WorkloadContext>(options => options.UseSqlServer(connectionString));
 
-      services.AddScoped<ICustomerEventService, WorkloadService>();
-      services.AddScoped<IEmployeeEventService, WorkloadService>();
+      services.AddScoped<ICustomerChangeService, WorkloadService>();
+      services.AddScoped<IEmployeeChangeService, WorkloadService>();
       services.AddScoped<IGetAllWorkloadCustomersService, WorkloadService>();
       services.AddScoped<IGetAllWorkloadEmployeesService, WorkloadService>();
       services.AddScoped<IStartWorkloadService, WorkloadService>();
       services.AddScoped<IStopWorkloadService, WorkloadService>();
       services.AddScoped<IGetWorkloadsByCustomerService, WorkloadService>();
       services.AddScoped<IGetWorkloadsByEmployeeService, WorkloadService>();
+
       return services;
     }
   }

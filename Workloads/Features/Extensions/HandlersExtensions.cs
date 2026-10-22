@@ -8,6 +8,8 @@ using global::Workloads.Features.Workloads.GetByCustomer;
 using global::Workloads.Features.Workloads.GetByEmployee;
 using global::Workloads.Features.Workloads.Start;
 using global::Workloads.Features.Workloads.Stop;
+using global::Workloads.Features.Customers.HandleChanges;
+using global::Workloads.Features.Employees.HandleChanges;
 
 public static class HandlersExtensions
 {
@@ -15,6 +17,11 @@ public static class HandlersExtensions
   {
     public IServiceCollection AddWorkloadsHandlers()
     {
+      // Dessa är att betrakta som driving adapters, alltså samma som endpoints
+      services.AddHostedService<CustomerWorker>();
+      services.AddHostedService<EmployeeWorker>();
+
+      // Dessa är dependencies som används för våra slices
       services.AddScoped<GetAllWorkloadCustomersMapper>();
       services.AddScoped<GetAllWorkloadEmployeesMapper>();
       services.AddScoped<StartWorkloadMapper>();

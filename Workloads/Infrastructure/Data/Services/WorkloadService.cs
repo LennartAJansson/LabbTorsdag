@@ -14,7 +14,7 @@ using Workloads.Features.Workloads.Stop;
 using Workloads.Infrastructure.Data.Context;
 
 internal class WorkloadService(WorkloadContext context)
-  : ICustomerEventService, IEmployeeEventService, IGetAllWorkloadCustomersService,
+  : ICustomerChangeService, IEmployeeChangeService, IGetAllWorkloadCustomersService,
     IGetAllWorkloadEmployeesService, IStartWorkloadService, IStopWorkloadService,
     IGetWorkloadsByCustomerService, IGetWorkloadsByEmployeeService
 {

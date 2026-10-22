@@ -16,7 +16,7 @@ public class CustomerWorker(ILogger<CustomerWorker> logger, IMessaging<CustomerC
     await foreach(Message<CustomerContract> msg in messaging.ConsumeAsync(stoppingToken))
     {
       await using var scope = scopeFactory.CreateAsyncScope();
-      var service = scope.ServiceProvider.GetRequiredService<ICustomerEventService>();
+      var service = scope.ServiceProvider.GetRequiredService<ICustomerChangeService>();
       WorkloadCustomer customer = new()
       {
         Id = msg.Payload.Id,
