@@ -10,7 +10,7 @@ using global::Employees.Infrastructure.Data.Context;
 
 using Microsoft.EntityFrameworkCore;
 
-public class EmployeeService(EmployeeContext context)
+internal class EmployeeService(EmployeeContext context)
   : ICreateEmployeeService, IGetEmployeeService, IGetAllEmployeesService, IUpdateEmployeeService, IDeleteEmployeeService
 {
   public async Task<Employee> CreateEmployeeAsync(Employee employee, CancellationToken cancellationToken)

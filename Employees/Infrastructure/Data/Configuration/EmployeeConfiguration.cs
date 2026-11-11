@@ -5,7 +5,7 @@ using global::Employees.Features.Employees.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public class EmployeeConfiguration
+internal class EmployeeConfiguration
   : IEntityTypeConfiguration<Employee>
 {
   public void Configure(EntityTypeBuilder<Employee> builder)

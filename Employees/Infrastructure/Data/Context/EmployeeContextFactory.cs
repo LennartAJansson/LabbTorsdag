@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-public class EmployeeContextFactory : IDesignTimeDbContextFactory<EmployeeContext>
+internal class EmployeeContextFactory : IDesignTimeDbContextFactory<EmployeeContext>
 {
   public EmployeeContext CreateDbContext(string[] args)
   {

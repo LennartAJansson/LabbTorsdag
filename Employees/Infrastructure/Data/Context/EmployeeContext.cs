@@ -4,7 +4,7 @@ using global::Employees.Features.Employees.Model;
 
 using Microsoft.EntityFrameworkCore;
 
-public class EmployeeContext(DbContextOptions<EmployeeContext> options)
+internal class EmployeeContext(DbContextOptions<EmployeeContext> options)
   : DbContext(options)
 {
   public DbSet<Employee> Employees => Set<Employee>();

@@ -2,7 +2,7 @@ namespace Employees.Features.Employees.GetAllEmployees;
 
 using global::Employees.Features.Employees.Model;
 
-public interface IGetAllEmployeesService
+internal interface IGetAllEmployeesService
 {
   Task<IEnumerable<Employee>> GetAllEmployeesAsync(CancellationToken cancellationToken);
 }

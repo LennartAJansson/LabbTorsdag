@@ -14,7 +14,7 @@ public class EntityBase
 }
 
 
-public sealed class Employee : EntityBase
+internal sealed class Employee : EntityBase
 {
   public required string SSID { get; set; }
   public required string Title { get; set; }
